@@ -1,4 +1,8 @@
-const navLinks = ['About', 'Services', 'Contact'];
+const navLinks = [
+  { label: 'About', href: '#problem' },
+  { label: 'Services', href: '#services' },
+  { label: 'Contact', href: '#contact' }
+];
 
 const frameworkSteps = [
   'Identify high-revenue flows',
@@ -44,8 +48,8 @@ export default function Home() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-700">QA Central</p>
           <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
             {navLinks.map((link) => (
-              <a key={link} href="#contact" className="transition hover:text-slate-900">
-                {link}
+              <a key={link.label} href={link.href} className="transition hover:text-slate-900">
+                {link.label}
               </a>
             ))}
           </nav>
@@ -74,7 +78,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-shell space-y-5">
+        <section id="problem" className="section-shell space-y-5">
           <h2 className="section-title">Most Startups Don&apos;t Fail Because of Competition.</h2>
           <ul className="grid gap-3 text-slate-700">
             <li>• Production bugs kill trust.</li>
@@ -143,8 +147,8 @@ export default function Home() {
         <section className="section-shell space-y-4">
           <h2 className="section-title">Founder Feedback</h2>
           <blockquote className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-slate-700">
-            “Our releases stopped feeling like roulette. We gained clarity on what could fail and exactly
-            what to lock down before shipping.”
+            “Our releases stopped feeling like roulette. We gained clarity on what could fail and exactly what to
+            lock down before shipping.”
             <footer className="mt-4 text-sm font-medium text-slate-900">— Alex Chen, Founder, NimbusHQ</footer>
           </blockquote>
           <a href="#contact" className="secondary-btn">
@@ -152,31 +156,43 @@ export default function Home() {
           </a>
         </section>
 
-        <section id="contact" className="section-shell space-y-6">
+        <section className="section-shell space-y-5 text-center md:text-left">
           <h2 className="section-title">Don&apos;t Let Avoidable Bugs Kill Your Growth.</h2>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a href="#contact" className="primary-btn">
+              Book a 30-min Risk Call
+            </a>
+            <a href="#contact" className="secondary-btn">
+              Download the Risk Checklist
+            </a>
+          </div>
+        </section>
+
+        <section id="contact" className="section-shell space-y-6">
+          <h2 className="section-title">Request Your Risk Call</h2>
           <p className="text-slate-700">Tell me where risk is showing up. I&apos;ll help you prioritize what protects revenue.</p>
           <form className="grid gap-4 md:grid-cols-2">
-            <label className="text-sm font-medium text-slate-700">
+            <label htmlFor="name" className="text-sm font-medium text-slate-700">
               Name
-              <input className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="text" />
+              <input id="name" name="name" required className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="text" />
             </label>
-            <label className="text-sm font-medium text-slate-700">
+            <label htmlFor="company" className="text-sm font-medium text-slate-700">
               Company
-              <input className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="text" />
+              <input id="company" name="company" className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="text" />
             </label>
-            <label className="text-sm font-medium text-slate-700">
+            <label htmlFor="email" className="text-sm font-medium text-slate-700">
               Email
-              <input className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="email" />
+              <input id="email" name="email" required className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="email" />
             </label>
-            <label className="text-sm font-medium text-slate-700">
+            <label htmlFor="teamSize" className="text-sm font-medium text-slate-700">
               Current team size
-              <input className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="text" />
+              <input id="teamSize" name="teamSize" className="mt-1 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" type="text" />
             </label>
-            <label className="text-sm font-medium text-slate-700 md:col-span-2">
+            <label htmlFor="risk" className="text-sm font-medium text-slate-700 md:col-span-2">
               Biggest product risk
-              <textarea className="mt-1 min-h-28 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" />
+              <textarea id="risk" name="risk" required className="mt-1 min-h-28 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-500" />
             </label>
-            <div className="md:col-span-2 flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-col gap-3 md:col-span-2 sm:flex-row">
               <button type="submit" className="primary-btn">
                 Request Risk Call
               </button>
@@ -192,10 +208,18 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-slate-600 md:flex-row md:items-center md:justify-between md:px-8">
           <p>© {new Date().getFullYear()} QA Central</p>
           <div className="flex flex-wrap gap-4">
-            <a href="#contact" className="hover:text-slate-900">About</a>
-            <a href="#services" className="hover:text-slate-900">Services</a>
-            <a href="#contact" className="hover:text-slate-900">Contact</a>
-            <a href="#" className="hover:text-slate-900">LinkedIn</a>
+            <a href="#problem" className="hover:text-slate-900">
+              About
+            </a>
+            <a href="#services" className="hover:text-slate-900">
+              Services
+            </a>
+            <a href="#contact" className="hover:text-slate-900">
+              Contact
+            </a>
+            <a href="#" className="hover:text-slate-900">
+              LinkedIn
+            </a>
           </div>
         </div>
       </footer>
